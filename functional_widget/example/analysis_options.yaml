@@ -1,0 +1,7 @@
+analyzer:
+  plugins:
+    functional_widget
+
+plugins:
+  functional_widget:
+    enabled: true

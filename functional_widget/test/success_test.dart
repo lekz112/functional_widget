@@ -1,5 +1,5 @@
 import 'package:code_gen_tester/code_gen_tester.dart';
-import 'package:functional_widget/function_to_widget_class.dart';
+import 'package:functional_widget/builder.dart';
 import 'package:test/test.dart';
 
 void main() async {
