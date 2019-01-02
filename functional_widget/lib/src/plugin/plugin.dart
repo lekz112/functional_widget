@@ -42,7 +42,7 @@ class FunctionWidgetAnalyzerPlugin extends ServerPlugin {
   // This is the protocol version, not the plugin version. It must match the
   // version of the `analyzer_plugin` package.
   @override
-  String get version => '1.0.0-alpha.0';
+  String get version => '0.0.1-alpha.5';
 
   @override
   String get contactInfo =>

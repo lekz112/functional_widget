@@ -4,4 +4,5 @@ description: This pubspec determines the version of the analyzer plugin to load.
 environment:
     sdk: '>=1.24.0-dev.1.0'
 dependencies:
-    functional_widget: ^0.3.0
+    functional_widget:
+        path: ../../
