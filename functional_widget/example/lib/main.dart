@@ -10,6 +10,6 @@ Widget foo() {
 }
 
 void main() => runApp(
-      // we use the generated class
+      // we use the generated  
       const Foo(),
     );

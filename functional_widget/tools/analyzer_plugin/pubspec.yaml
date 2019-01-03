@@ -5,4 +5,4 @@ environment:
     sdk: '>=1.24.0-dev.1.0'
 dependencies:
     functional_widget:
-        path: ../../
+        path: /Users/remirousselet/dev/functional_widget/functional_widget
