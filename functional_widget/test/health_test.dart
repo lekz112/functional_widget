@@ -1,3 +1,4 @@
+import 'package:analyzer/error/error.dart';
 import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
@@ -13,7 +14,11 @@ void main() {
 
     var errorResult = await main.session
         .getErrors('/functional_widget/test/src/privacy.g.dart');
-    expect(errorResult.errors, isEmpty);
+
+    expect(errorResult.errors, [
+      isA<AnalysisError>().having((s) => s.errorCode.uniqueName,
+          '_ExtraPrivate', 'HintCode.UNUSED_ELEMENT')
+    ]);
     errorResult = await main.session
         .getErrors('/functional_widget/test/src/privacy.dart');
   });
@@ -38,14 +43,14 @@ void main() {
       {
         'functional_widget|test/src/hook.dart': useAssetReader,
       },
-      (r) => r.libraries.firstWhere(
-          (element) => element.source.toString().contains('hook')),
+      (r) => r.libraries
+          .firstWhere((element) => element.source.toString().contains('hook')),
     );
 
-    var errorResult = await main.session
-        .getErrors('/functional_widget/test/src/hook.g.dart');
+    var errorResult =
+        await main.session.getErrors('/functional_widget/test/src/hook.g.dart');
     expect(errorResult.errors, isEmpty);
-    errorResult = await main.session
-        .getErrors('/functional_widget/test/src/hook.dart');
+    errorResult =
+        await main.session.getErrors('/functional_widget/test/src/hook.dart');
   });
 }
