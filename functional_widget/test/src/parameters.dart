@@ -1,4 +1,5 @@
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:meta/meta.dart';
 
 import 'flutter.dart';
 
@@ -38,13 +39,13 @@ Widget withKeyThenOneArg(Key key, int foo) {
 }
 
 @widget
-Widget whateverThenContext(int foo, {BuildContext context}) {
+Widget whateverThenContext(int foo, {@required BuildContext context}) {
   assert(context != null);
   return Text('$foo', textDirection: TextDirection.ltr);
 }
 
 @widget
-Widget _mixt(int a, String b, {double c}) {
+Widget _mixt(int a, String b, {@required double c}) {
   assert(c != null);
   return Text(
     'a: $a b: $b c: $c',
