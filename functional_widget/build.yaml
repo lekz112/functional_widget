@@ -1,16 +1,20 @@
 targets:
-    $default:
-        builders:
-            functional_widget:
-                enabled: true
-                generate_for:
-                    include:
-                        - example/lib/*
+  $default:
+    builders:
+      functional_widget:
+        enabled: true
+        generate_for:
+          exclude:
+            - test
+            - example/lib/*
+          include:
+            - test/src/*
+
 builders:
-    functional_widget:
-        import: 'package:functional_widget/builder.dart'
-        builder_factories: ['functionalWidget']
-        build_extensions: { '.dart': ['.functional_widget.g.part'] }
-        auto_apply: dependents
-        build_to: cache
-        applies_builders: ['source_gen|combining_builder']
+  functional_widget:
+    import: "package:functional_widget/builder.dart"
+    builder_factories: ["functionalWidget"]
+    build_extensions: { ".dart": [".functional_widget.g.part"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

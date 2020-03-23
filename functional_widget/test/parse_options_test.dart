@@ -1,7 +1,7 @@
 import 'package:build/build.dart';
+import 'package:functional_widget/src/parse_builder_options.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:test/test.dart';
-import 'package:functional_widget/src/utils.dart';
 
 void main() {
   group('parseOptions', () {
@@ -9,14 +9,18 @@ void main() {
       expect(
         () => parseBuilderOptions(
             const BuilderOptions(<String, dynamic>{'foo': 42})),
-        throwsA(const TypeMatcher<ArgumentError>()
-            .having((f) => f.message, 'message', 'Unknown option `foo`: 42')),
+        throwsA(
+          isA<ArgumentError>()
+              .having((f) => f.message, 'message', 'Unknown option `foo`: 42'),
+        ),
       );
       expect(
         () => parseBuilderOptions(
             const BuilderOptions(<String, dynamic>{'bar': 'foo'})),
-        throwsA(const TypeMatcher<ArgumentError>()
-            .having((f) => f.message, 'message', 'Unknown option `bar`: foo')),
+        throwsA(
+          isA<ArgumentError>()
+              .having((f) => f.message, 'message', 'Unknown option `bar`: foo'),
+        ),
       );
     });
     group('debugFillProperties', () {

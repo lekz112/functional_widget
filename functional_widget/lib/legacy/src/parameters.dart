@@ -54,10 +54,10 @@ Reference _parameterToReference(ParameterElement element) {
   if (element.type == null) {
     return null;
   }
-  if (element.type.isUndefined) {
-    var token = findBeginToken(element);
-    return refer(token.toString());
-  }
+  // if (element.type == null) {
+  //   var token = findBeginToken(element);
+  //   return refer(token.toString());
+  // }
 
   return _typeToReference(element.type);
 }
@@ -72,7 +72,7 @@ Reference _typeToReference(element_type.DartType type) {
     return t.type;
   }
 
-  return type.displayName != null ? refer(type.displayName) : null;
+  return type.getDisplayString() != null ? refer(type.getDisplayString()) : null;
 }
 
 FunctionType _functionTypedElementToFunctionType(

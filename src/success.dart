@@ -4,64 +4,8 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:meta/meta.dart' as meta;
 import 'fake_flutter.dart';
 
-@swidget
-Widget sWidget() => Container();
-
-@hwidget
-Widget hWidget() => Container();
-
-@widget
-Widget adaptiveWidget() => Container();
-
-@widget
-Widget noArgument() => Container();
-
-@widget
-Widget required(foo, int bar) => Container();
-
-@widget
-Widget named({foo, int bar}) => Container();
-
 @widget
 Widget namedDefault({int foo = 42}) => Container();
-
-@widget
-Widget mixt(foo, int bar, {nfoo, int nbar}) => Container();
-
-@widget
-Widget onlyOneArg(int foo) => Container();
-
-@widget
-Widget withContext(BuildContext context) => Container();
-
-@widget
-Widget withContextThenOneArg(BuildContext context, int foo) => Container();
-
-@widget
-Widget withKey(Key key) => Container();
-
-@widget
-Widget withKeyThenOneArg(Key key, int foo) => Container();
-
-@widget
-Widget withContextThenKey(BuildContext context, Key key) => Container();
-
-@widget
-Widget withContextThenKeyThenOneArg(BuildContext context, Key key, int foo) =>
-    Container();
-
-@widget
-Widget withKeyThenContext(Key key, BuildContext context) => Container();
-
-@widget
-Widget withKeyThenContextThenOneArg(Key key, BuildContext context, int foo) =>
-    Container();
-
-@widget
-Widget whateverThenContext(int foo, BuildContext bar) => Container();
-
-@widget
-Widget whateverThenKey(int foo, Key bar) => Container();
 
 /// Hello
 /// World
