@@ -1,56 +1,41 @@
 import 'package:analyzer/error/error.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
+
+import 'common.dart';
 
 void main() {
   test('privacy.dart lint', () async {
-    final main = await resolveSources(
-      {
-        'functional_widget|test/src/privacy.dart': useAssetReader,
-      },
-      (r) => r.libraries.firstWhere(
-          (element) => element.source.toString().contains('privacy')),
-    );
+    final main = await resolve('privacy');
+    print(
+        'Librayr ${main.exportNamespace} ${main.publicNamespace} ${main.getExtendedDisplayName('a')}');
 
-    var errorResult = await main.session
-        .getErrors('/functional_widget/test/src/privacy.g.dart');
+    var errorResult = await main.getGeneratedErrors();
 
     expect(errorResult.errors, [
       isA<AnalysisError>().having((s) => s.errorCode.uniqueName,
           '_ExtraPrivate', 'HintCode.UNUSED_ELEMENT')
     ]);
-    errorResult = await main.session
-        .getErrors('/functional_widget/test/src/privacy.dart');
+    errorResult = await main.getMainErrors();
+
+    expect(errorResult.errors, isEmpty);
   });
 
   test('parameters.dart lint', () async {
-    final main = await resolveSources(
-      {
-        'functional_widget|test/src/parameters.dart': useAssetReader,
-      },
-      (r) => r.libraries.firstWhere(
-          (element) => element.source.toString().contains('parameters')),
-    );
+    final main = await resolve('general');
 
-    var errorResult = await main.session
-        .getErrors('/functional_widget/test/src/parameters.g.dart');
+    var errorResult = await main.getGeneratedErrors();
     expect(errorResult.errors, isEmpty);
-    errorResult = await main.session
-        .getErrors('/functional_widget/test/src/parameters.dart');
+
+    errorResult = await main.getMainErrors();
+    expect(errorResult.errors, isEmpty);
   });
   test('hook.dart lint', () async {
-    final main = await resolveSources(
-      {
-        'functional_widget|test/src/hook.dart': useAssetReader,
-      },
-      (r) => r.libraries
-          .firstWhere((element) => element.source.toString().contains('hook')),
-    );
+    final main = await resolve('hook');
 
-    var errorResult =
-        await main.session.getErrors('/functional_widget/test/src/hook.g.dart');
+    var errorResult = await main.getGeneratedErrors();
     expect(errorResult.errors, isEmpty);
-    errorResult =
-        await main.session.getErrors('/functional_widget/test/src/hook.dart');
+
+    errorResult = await main.getMainErrors();
+    expect(errorResult.errors, isEmpty);
   });
 }

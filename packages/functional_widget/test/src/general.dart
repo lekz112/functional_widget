@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 import 'flutter.dart';
 
-part 'parameters.g.dart';
+part 'general.g.dart';
 
 @widget
 Widget empty() {

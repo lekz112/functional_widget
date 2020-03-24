@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration/parameters.dart';
+import 'package:integration/general.dart';
 
 void main() {
   testWidgets('no parameter', (tester) async {
@@ -31,22 +30,6 @@ void main() {
     );
 
     expect(find.text(Colors.red.toString()), findsOneWidget);
-
-// TODO:
-    // final main = await resolveSources(
-    //   {
-    //     'functional_widget|test/integration/parameters_test.dart':
-    //         useAssetReader,
-    //   },
-    //   (r) => r.libraries.firstWhere(
-    //       (element) => element.source.toString().contains('parameters_test')),
-    // );
-
-    // var errorResult = await main.session.getErrors(
-    //     '/functional_widget/test/integration/parameters_test.g.dart');
-    // expect(errorResult.errors, isEmpty);
-    // errorResult = await main.session
-    //     .getErrors('/functional_widget/test/integration/parameters_test.dart');
   });
   testWidgets('whateverThenContext', (tester) async {
     await tester.pumpWidget(
