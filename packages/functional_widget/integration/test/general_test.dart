@@ -100,4 +100,11 @@ void main() {
 
     expect(find.text('a: 42 b: 42 c: 42.0'), findsOneWidget);
   });
+  testWidgets('genericExtends', (tester) async {
+    await tester.pumpWidget(
+      const GenericExtends<int, String>(21, '42'),
+    );
+
+    expect(find.text('foo: 21 bar: 42'), findsOneWidget);
+  });
 }

@@ -12,6 +12,8 @@ class _Data {
     @required this.name,
     @required this.widgetType,
     @required this.parameters,
+    @required this.comments,
+    @required this.genericsDefinition,
   }) : outputName = _parseOutputName(name);
 
   static String _parseOutputName(String name) {
@@ -23,9 +25,11 @@ class _Data {
   }
 
   final String name;
+  final String comments;
   final String outputName;
   final FunctionalWidgetType widgetType;
   final Parameters parameters;
+  final List<TypeParameterElement> genericsDefinition;
 }
 
 class FunctionalWidgetGenerator
@@ -33,6 +37,11 @@ class FunctionalWidgetGenerator
   FunctionalWidgetGenerator(this.defaultOptions);
 
   final FunctionalWidget defaultOptions;
+
+  @override
+  Iterable<Object> generateForAll(void globalData) sync* {
+    yield '// ignore_for_file: deprecated_member_use_from_same_package';
+  }
 
   @override
   Iterable<Object> generateForData(void globalData, _Data data) sync* {
@@ -59,6 +68,8 @@ class FunctionalWidgetGenerator
       name: element.name,
       widgetType: functionalWidget.widgetType ?? defaultOptions.widgetType,
       parameters: Parameters.fromParameterElements(element.parameters),
+      comments: element.documentationComment ?? '',
+      genericsDefinition: element.typeParameters,
     );
   }
 
@@ -98,9 +109,9 @@ class FunctionalWidgetGenerator
     final constructorNamedParameters = [
       'Key key,',
       ...parametersToCompute.where((p) => p.isNamed).map((p) {
-        var res = p.hasRequired ? '@required' : '';
+        final decorators = p.metadata.map((e) => e.toSource()).join();
 
-        return '$res ${p.type} ${p.name},';
+        return '$decorators ${p.type} ${p.name},';
       }),
     ];
 
@@ -108,8 +119,14 @@ class FunctionalWidgetGenerator
       return '_${p.name} = ${p.name},';
     });
 
+    final generics = data.genericsDefinition.isEmpty
+        ? ''
+        : '<${data.genericsDefinition.join(',')}>';
+
     return '''
-class ${data.outputName} extends ${data.widgetType.superClass} {
+${data.comments}
+class ${data.outputName}$generics extends ${data.widgetType.superClass} {
+  ${data.comments}
   const ${data.outputName}(${constructorPositionalParameters.join()}{${constructorNamedParameters.join()}}): ${constructorInitializers.join()} super(key: key);
 
   ${properties.join()}

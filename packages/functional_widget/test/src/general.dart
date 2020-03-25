@@ -57,3 +57,27 @@ Widget _mixt(int a, String b, {@required double c}) {
 Widget dartUi(Color color) {
   return Text(color.toString(), textDirection: TextDirection.ltr);
 }
+
+/// Hello
+/// World
+@widget
+Widget documentation(int foo) => Container();
+
+@widget
+Widget annotation({@required @deprecated int foo}) => Container();
+
+typedef Typedef = void Function();
+
+@widget
+Widget typedefFunction(Typedef t) => Container();
+
+@widget
+Widget inlineFunction(void Function() t) => Container();
+
+@widget
+Widget genericExtends<T extends num, S>(T foo, S bar) {
+  return Text(
+    'foo: $foo bar: $bar',
+    textDirection: TextDirection.ltr,
+  );
+}

@@ -6,8 +6,6 @@ import 'common.dart';
 void main() {
   test('privacy.dart lint', () async {
     final main = await resolve('privacy');
-    print(
-        'Librayr ${main.exportNamespace} ${main.publicNamespace} ${main.getExtendedDisplayName('a')}');
 
     var errorResult = await main.getGeneratedErrors();
 
