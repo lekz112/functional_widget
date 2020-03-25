@@ -81,3 +81,8 @@ Widget genericExtends<T extends num, S>(T foo, S bar) {
     textDirection: TextDirection.ltr,
   );
 }
+
+@widget
+Widget namedDefault({int foo = 42}) {
+  return Text('$foo', textDirection: TextDirection.ltr);
+}

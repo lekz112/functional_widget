@@ -111,7 +111,11 @@ class FunctionalWidgetGenerator
       ...parametersToCompute.where((p) => p.isNamed).map((p) {
         final decorators = p.metadata.map((e) => e.toSource()).join();
 
-        return '$decorators ${p.type} ${p.name},';
+        var res = '$decorators ${p.type} ${p.name}';
+        if (p.defaultValueCode != null) {
+          res = '$res = ${p.defaultValueCode}';
+        }
+        return '$res,';
       }),
     ];
 

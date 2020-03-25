@@ -107,4 +107,17 @@ void main() {
 
     expect(find.text('foo: 21 bar: 42'), findsOneWidget);
   });
+  testWidgets('namedDefault', (tester) async {
+    await tester.pumpWidget(
+      const NamedDefault(),
+    );
+
+    expect(find.text('42'), findsOneWidget);
+
+    await tester.pumpWidget(
+      const NamedDefault(foo: 21),
+    );
+
+    expect(find.text('21'), findsOneWidget);
+  });
 }
